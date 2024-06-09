@@ -31,7 +31,7 @@ public class BookController {
         if (book != null){
             return new ResponseEntity<>(bookService.addBook(book), HttpStatus.CREATED);
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
     @PutMapping("/{id}")

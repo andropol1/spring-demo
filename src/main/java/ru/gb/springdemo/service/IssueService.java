@@ -8,7 +8,9 @@ import ru.gb.springdemo.repository.BookRepository;
 import ru.gb.springdemo.repository.IssueRepository;
 import ru.gb.springdemo.repository.ReaderRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 public class IssueService {
@@ -25,9 +27,20 @@ public class IssueService {
     this.readerRepository = readerRepository;
     this.issueRepository = issueRepository;
   }
-
   public Issue getByID(Long id) {
     return issueRepository.getByID(id);
+  }
+  public List<Issue> getAllIssues(){
+    return issueRepository.getAllIssues();
+  }
+  public List<Issue> getAllIssuesByReaderId(long id){
+    List<Issue> list = issueRepository.getIssuesByReader(id);
+    for (Issue issue:
+         list) {
+        issue.setReaderName(readerRepository.getReaderById(id).getName());
+        issue.setBookName(bookRepository.getBookById(issue.getBookId()).getName());
+    }
+    return list;
   }
 
   public Issue saveIssue(Issue issue) {

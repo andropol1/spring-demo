@@ -16,6 +16,8 @@ public class Issue {
   private final long id;
   private final long bookId;
   private final long readerId;
+  private String readerName = null;
+  private String bookName = null;
   private final LocalDateTime issuedAt;
   private LocalDateTime returnedAt = null;
 

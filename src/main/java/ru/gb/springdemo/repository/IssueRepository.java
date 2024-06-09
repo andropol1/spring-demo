@@ -1,10 +1,10 @@
 package ru.gb.springdemo.repository;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
 import ru.gb.springdemo.model.Issue;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,6 +12,17 @@ import java.util.Objects;
 public class IssueRepository {
 
   private List<Issue> issues;
+
+  public IssueRepository(List<Issue> issues) {
+    this.issues = issues;
+  }
+  @PostConstruct
+  public void generateData(){
+    issues.addAll(List.of(
+            new Issue(1, 1),
+            new Issue(2, 1)));
+  }
+
   public Issue save(Issue issue) {
     issues.add(issue);
     return issue;
@@ -31,6 +42,9 @@ public class IssueRepository {
     return issues.stream().filter(it -> Objects.equals(it.getId(), id))
             .findFirst()
             .orElse(null);
+  }
+  public List<Issue> getAllIssues(){
+    return issues;
   }
 
   public List<Issue> getIssuesByReader(Long readerId) {

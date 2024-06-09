@@ -20,7 +20,8 @@ public class ReaderRepository {
   @PostConstruct
   public void generateData() {
     readers.addAll(List.of(
-      new Reader("Игорь")
+      new Reader("Игорь"),
+            new Reader("Андрей")
     ));
   }
 
@@ -28,6 +29,9 @@ public class ReaderRepository {
     return readers.stream().filter(it -> Objects.equals(it.getId(), id))
       .findFirst()
       .orElse(null);
+  }
+  public List<Reader> getAllReaders(){
+    return readers;
   }
   public Reader addReader(Reader reader){
     Reader newReader = new Reader(reader.getName());

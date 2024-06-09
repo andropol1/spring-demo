@@ -31,6 +31,9 @@ public class BookRepository {
       .findFirst()
       .orElse(null);
   }
+  public List<Book> getAllBooks(){
+    return books;
+  }
   public void deleteBookById(long id){
     books.removeIf(book -> Objects.equals(book.getId(), id));
   }
