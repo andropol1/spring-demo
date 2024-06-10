@@ -1,6 +1,7 @@
 package ru.gb.springdemo.repository;
 
 import jakarta.annotation.PostConstruct;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ru.gb.springdemo.model.Book;
 
@@ -8,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Repository
-public class BookRepository {
+//@Repository
+public interface BookRepository extends JpaRepository<Book, Long> {
 
-  private final List<Book> books;
+/*  private final List<Book> books;
 
   public BookRepository() {
     this.books = new ArrayList<>();
@@ -46,6 +47,6 @@ public class BookRepository {
     Book updatedBook = getBookById(id);
     updatedBook.setName(book.getName());
     return updatedBook;
-  }
+  }*/
 
 }
