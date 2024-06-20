@@ -1,5 +1,7 @@
 package ru.gb.springdemo.api;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,11 +13,17 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/issue")
+@Tag(name = "Issues", description = "API to manage issues.")
 public class IssueController {
 	@Autowired
 	private IssueService issueService;
 
 	@GetMapping("/{id}")
+	@Operation(
+			summary = "Retrieves the issue by :id",
+			description = "The response is the issue object with id,readerId,bookId,issued_at,returned_at."
+	)
+
 	public ResponseEntity<Issue> getByID(@PathVariable Long id) {
 		return issueService.getByID(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 /*		Issue issue = issueService.getByID(id);
@@ -27,6 +35,10 @@ public class IssueController {
 	}
 
 	@PostMapping
+	@Operation(
+			summary = "Creates an issues",
+			description = "Creates an issue using :readerId and :bookId from request."
+	)
 	public ResponseEntity<Issue> create(@RequestBody Issue issue) {
 		if (issue != null) {
 			try {
@@ -43,6 +55,10 @@ public class IssueController {
 	}
 
 	@PutMapping("/{id}")
+	@Operation(
+			summary = "Update issue",
+			description = "Updates issue's returned_at field, book considered as \\\"RETURNED\\\""
+	)
 	public ResponseEntity<Issue> update(@PathVariable Long id, @RequestBody Issue issue) {
 		if (issue != null) {
 			issue.setId(id);
@@ -54,6 +70,10 @@ public class IssueController {
 	}
 
 	@DeleteMapping("/{id}")
+	@Operation(
+			summary = "Delete issue",
+			description = "Delete issue from db"
+	)
 	public ResponseEntity<Void> deleteById(@PathVariable Long id) {
 		issueService.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
