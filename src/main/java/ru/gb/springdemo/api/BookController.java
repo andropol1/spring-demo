@@ -14,6 +14,8 @@ import ru.gb.springdemo.aspect.Timer;
 import ru.gb.springdemo.model.Book;
 import ru.gb.springdemo.service.BookService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/book")
 @Tag(name = "Books", description = "API to manage books")
@@ -38,6 +40,20 @@ public class BookController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}*/
+	}
+
+	@GetMapping("/all")
+	@Operation(
+			summary = "Get all books",
+			description = "You'll get the list of all allowed books"
+	)
+	public ResponseEntity<List<Book>> getAll() {
+		List<Book> books = bookService.getAllBooks();
+		if (books.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		} else {
+			return ResponseEntity.ok(books);
+		}
 	}
 
 	@DeleteMapping("/{id}")

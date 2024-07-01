@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.gb.springdemo.model.Issue;
 import ru.gb.springdemo.service.IssueService;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -32,6 +33,20 @@ public class IssueController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}*/
+	}
+
+	@GetMapping("/all")
+	@Operation(
+			summary = "Get all issues",
+			description = "Get the list of all existed issues"
+	)
+	public ResponseEntity<List<Issue>> getAll() {
+		List<Issue> issues = issueService.getAllIssues();
+		if (issues.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<>(issues, HttpStatus.OK);
+		}
 	}
 
 	@PostMapping

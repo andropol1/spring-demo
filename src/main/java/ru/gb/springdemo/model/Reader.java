@@ -1,14 +1,13 @@
 package ru.gb.springdemo.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Data
 @Entity
 @Table(name = "readers")
-//@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class Reader {
 
 	//public static long sequence = 1L;
@@ -20,6 +19,9 @@ public class Reader {
 	@Column(name = "name")
 	private String name;
 
+	public Reader(String name) {
+		this.name = name;
+	}
 	/*public Reader(String name) {
 		this(sequence++, name);
 	}*/

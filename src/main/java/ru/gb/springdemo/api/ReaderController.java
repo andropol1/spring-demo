@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.gb.springdemo.model.Reader;
 import ru.gb.springdemo.service.ReaderService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/reader")
 @Tag(name = "Readers", description = "API to manage readers.")
@@ -30,6 +32,20 @@ public class ReaderController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }*/
+	}
+
+	@GetMapping("/all")
+	@Operation(
+			summary = "Get all readers",
+			description = "Get the list of all readers"
+	)
+	public ResponseEntity<List<Reader>> getAll() {
+		List<Reader> readers = readerService.getAllReaders();
+		if (readers.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		} else {
+			return ResponseEntity.ok(readers);
+		}
 	}
 
 	@PostMapping

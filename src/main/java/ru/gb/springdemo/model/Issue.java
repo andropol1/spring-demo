@@ -1,7 +1,9 @@
 package ru.gb.springdemo.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import java.time.LocalDateTime;
@@ -12,6 +14,8 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "issues")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Issue {
 
 	// public static long sequence = 1L;
@@ -31,7 +35,11 @@ public class Issue {
 	@Column(name = "returned_at")
 	private LocalDateTime returnedAt;
 
-/*	public Issue(long bookId, long readerId) {
+	public Issue(Long bookId, Long readerId) {
+		this.bookId = bookId;
+		this.readerId = readerId;
+	}
+	/*	public Issue(long bookId, long readerId) {
 		this.id = sequence++;
 		this.bookId = bookId;
 		this.readerId = readerId;

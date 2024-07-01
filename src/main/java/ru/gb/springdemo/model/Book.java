@@ -2,15 +2,14 @@ package ru.gb.springdemo.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Data
 @Entity
 @Table(name = "books")
 @Schema(name = "Книга")
-//@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class Book {
 	//public static long sequence = 1L;
 	//@NonNull
@@ -23,8 +22,8 @@ public class Book {
 	@Schema(name = "Имя")
 	private String name;
 
-/*  public Book(String name) {
-    this(sequence++, name);
-  }*/
+	public Book(String name) {
+		this.name = name;
+	}
 
 }
