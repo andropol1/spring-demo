@@ -13,6 +13,7 @@ import ru.gb.springlibrary.model.Reader;
 import ru.gb.springlibrary.repository.ReaderRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 public class ReaderControllerTest extends JUnitSpringBootBase {
 	@Autowired
@@ -25,7 +26,7 @@ public class ReaderControllerTest extends JUnitSpringBootBase {
 	@AllArgsConstructor
 	@Data
 	static class JUnitReader {
-		private Long id;
+		private UUID id;
 		private String name;
 
 		public JUnitReader(String name) {
@@ -50,7 +51,7 @@ public class ReaderControllerTest extends JUnitSpringBootBase {
 	@Test
 	void getReaderByIdNotFound() {
 		webTestClient.get()
-				.uri("/reader/" + Long.MAX_VALUE)
+				.uri("/reader/" + UUID.randomUUID())
 				.exchange()
 				.expectStatus().isNotFound();
 	}

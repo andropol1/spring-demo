@@ -13,6 +13,7 @@ import ru.gb.springlibrary.model.Book;
 import ru.gb.springlibrary.repository.BookRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 class BookControllerTest extends JUnitSpringBootBase {
 	@Autowired
@@ -24,7 +25,7 @@ class BookControllerTest extends JUnitSpringBootBase {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	static class JUnitBook {
-		private Long id;
+		private UUID id;
 		private String name;
 
 		public JUnitBook(String name) {
@@ -49,7 +50,7 @@ class BookControllerTest extends JUnitSpringBootBase {
 	@Test
 	void getBookByIdNotFound() {
 		webTestClient.get()
-				.uri("/book/" + Long.MAX_VALUE)
+				.uri("/book/" + UUID.randomUUID())
 				.exchange()
 				.expectStatus().isNotFound();
 	}

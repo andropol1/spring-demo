@@ -19,6 +19,7 @@ import ru.gb.springlibrary.repository.ReaderRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 
 class IssueControllerTest extends JUnitSpringBootBase {
@@ -42,20 +43,20 @@ class IssueControllerTest extends JUnitSpringBootBase {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	static class JUnitIssue {
-		private Long id;
-		private Long bookId;
-		private Long readerId;
+		private UUID id;
+		private UUID bookId;
+		private UUID readerId;
 		private String readerName;
 		private String bookName;
 		private LocalDate issuedAt;
 		private LocalDate returnedAt;
 
-		public JUnitIssue(Long bookId, Long readerId) {
+		public JUnitIssue(UUID bookId, UUID readerId) {
 			this.bookId = bookId;
 			this.readerId = readerId;
 		}
 
-		public JUnitIssue(Long bookId, Long readerId, LocalDate issuedAt) {
+		public JUnitIssue(UUID bookId, UUID readerId, LocalDate issuedAt) {
 			this.bookId = bookId;
 			this.readerId = readerId;
 			this.issuedAt = issuedAt;
@@ -87,7 +88,7 @@ class IssueControllerTest extends JUnitSpringBootBase {
 	@Test
 	void getIssueByIdNotFound() {
 		webTestClient.get()
-				.uri("/issue/" + Long.MAX_VALUE)
+				.uri("/issue/" + UUID.randomUUID())
 				.exchange()
 				.expectStatus().isNotFound();
 	}
