@@ -1,24 +1,19 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Readers</title>
 </head>
 <body>
 <h1> Список читателей: </h1>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Название</th>
-    </tr>
-    <tr th:each="reader:${readers}">
-        <td th:text="${reader.getId()}"></td>
-        <td th:text="${reader.getName()}"></td>
-    </tr>
-</table>
+<div th:each="reader : ${readers}">
+    <a th:href="@{/ui/issue/reader/{id}(id=${reader.getId()})}"
+       th:text="${reader.getName()}">user</a>
+</div>
+<br/>
+<hr/>
+
+<a href="/ui/reader/new">Добавить человека</a>
 
 </body>
 </html>

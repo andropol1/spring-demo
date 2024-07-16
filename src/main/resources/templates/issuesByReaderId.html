@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Reader's issues</title>
+</head>
+<body>
+<p th:text="${'Имя читателя: ' + reader.getName()}">VALUE</p>
+
+<div th:if="${issues.isEmpty()}">
+    <p>У читателя нет книг на руках.</p>
+    <hr/>
+</div>
+
+<div th:if="${!issues.isEmpty()}">
+    <hr/>
+    <b>Книги:</b>
+    <br/>
+    <table th:each="issue : ${issues}">
+        <tr th:text="${issue.getBookName()}">book</tr>
+    </table>
+    <hr/>
+</div>
+
+<form th:method="GET" th:action="@{/ui/reader/{id}/edit(id=${reader.getId()})}">
+    <input type="submit" value="Редактировать"/>
+</form>
+
+<form th:method="DELETE" th:action="@{/reader/{id}(id=${reader.getId()})}">
+    <input type="submit" value="Удалить читателя"/>
+</form>
+</body>
+</html>

@@ -13,14 +13,18 @@
     <tr>
         <th>ID</th>
         <th>ID Читателя</th>
+        <th>Имя читателя</th>
         <th>ID Книги</th>
+        <th>Название книги</th>
         <th>Выдана</th>
         <th>Возвращена</th>
     </tr>
     <tr th:each="issue:${issues}">
         <td th:text="${issue.getId()}"></td>
-        <td><a th:href="@{/ui/readers/{id}(id=${issue.getReaderId()})}" th:text="${issue.getReaderId()}"></a></td>
-        <td><a th:href="@{/ui/books/{id}(id=${issue.getBookId()})}" th:text="${issue.getBookId()}"></a></td>
+        <td><a th:href="@{/ui/issue/reader/{id}(id=${issue.getReaderId()})}" th:text="${issue.getReaderId()}"></a></td>
+        <td th:text="${issue.getReaderName()}"></td>
+        <td><a th:href="@{/ui/book/{id}(id=${issue.getBookId()})}" th:text="${issue.getBookId()}"></a></td>
+        <td th:text="${issue.getBookName()}"></td>
         <td th:text="${issue.getIssuedAt()}"></td>
         <td th:text="${issue.getReturnedAt()}"></td>
     </tr>

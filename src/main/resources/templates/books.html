@@ -1,24 +1,19 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Books</title>
 </head>
 <body>
-    <h1> Список доступных книг: </h1>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Название</th>
-    </tr>
-    <tr th:each="book:${books}">
-        <td th:text="${book.getId()}"></td>
-        <td th:text="${book.getName()}"></td>
-    </tr>
-</table>
+<h1> Список книг: </h1>
+<div th:each="book : ${books}">
+    <a th:href="@{/ui/book/{id}(id=${book.getId()})}"
+       th:text="${book.getName()}">book</a>
+</div>
+<br/>
+<hr/>
+
+<a href="/ui/book/new">Добавить книгу</a>
 
 </body>
 </html>

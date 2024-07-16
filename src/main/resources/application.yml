@@ -1,7 +1,30 @@
-application:
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: 'true'
   datasource:
     url: jdbc:h2:mem:test
     username: user
     password:
     driver-class-name: org.h2.Driver
-  max-allowed-books: 2
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/library
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/library
+            user-name-attribute: preferred_username
+        registration:
+          keycloak:
+            client-id: postman
+            client-secret: dE0pOmES24rx7gP5X4VTNEH19ZEgg9vu
+            scope: openid
+server:
+  port: 8180
+application:
+  issue:
+    max-allowed-books: 4
